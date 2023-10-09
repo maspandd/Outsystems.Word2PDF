@@ -22,4 +22,8 @@
     <ProjectReference Include="..\Word2PDF\Outsystems.Word2PDF.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="resources\" />
+  </ItemGroup>
+
 </Project>

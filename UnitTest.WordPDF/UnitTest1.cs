@@ -11,7 +11,7 @@ namespace UnitTest.WordPDF
         public void Test1()
         {
             var ConvertWordPDF = new WordToPDF();
-            string filepath = Path.Combine("C:\\Users\\Lenovo\\source\\repos\\Word2PDF\\UnitTest.WordPDF\\resources\\test.docx"); //Add your path file here for testing
+            string filepath = Path.Combine(""); //Add your path file here for testing
             byte[] bytes = File.ReadAllBytes(filepath);
             ConvertWordPDF.Doc2PDF(bytes, out byte[] PDF, out string Message, out int Code);
 
