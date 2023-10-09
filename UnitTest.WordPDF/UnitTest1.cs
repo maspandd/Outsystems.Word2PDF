@@ -11,7 +11,7 @@ namespace UnitTest.WordPDF
         public void Test1()
         {
             var ConvertWordPDF = new WordToPDF();
-            string filepath = Path.Combine("C:\\Users\\Lenovo\\source\\repos\\Word2PDF\\UnitTest.WordPDF\\resources\\test.docx");
+            string filepath = Path.Combine("C:\\Users\\Lenovo\\source\\repos\\Word2PDF\\UnitTest.WordPDF\\resources\\test.docx"); //Add your path file here for testing
             byte[] bytes = File.ReadAllBytes(filepath);
             ConvertWordPDF.Doc2PDF(bytes, out byte[] PDF, out string Message, out int Code);
 
@@ -19,20 +19,7 @@ namespace UnitTest.WordPDF
             string filePath = @"C:\Users\Lenovo\Documents\ResultO2.pdf";
             File.WriteAllBytes(filePath, filesave);
 
+            Assert.True(Message == "");
         }
-
-        //[Test]
-        //public void Test2()
-        //{
-        //    var ConvertWordPDF = new WordToPDF();
-        //    string filepath = Path.Combine("C:\\Users\\Lenovo\\source\\repos\\Word2PDF\\UnitTest.WordPDF\\resources\\mengenalangka.docx");
-        //    byte[] bytes = File.ReadAllBytes(filepath);
-        //    ConvertWordPDF.Doc2PDF_New(bytes, out byte[] PDF, out string Message, out int Code);
-
-        //    //byte[] filesave = PDF;
-        //    //string filePath = @"C:\Users\Lenovo\Documents\Result.pdf";
-        //    //File.WriteAllBytes(filePath, filesave);
-
-        //}
     }
 }

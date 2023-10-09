@@ -21,17 +21,6 @@ namespace Word2PDF
             [OSParameter(Description = "Code")]
             out int Code
             );
-
-        [OSAction(Description = "Convert Doc to PDF")]
-        void Doc2PDF_New(
-            [OSParameter(DataType = OSDataType.BinaryData, Description = "input doc binary file")]
-            byte[] Doc,
-            [OSParameter(Description = "File PDF")]
-            out byte[] PDF,
-            [OSParameter(Description = "Message")]
-            out string Message,
-            [OSParameter(Description = "Code")]
-            out int Code
-            );
+        
     }
 }
