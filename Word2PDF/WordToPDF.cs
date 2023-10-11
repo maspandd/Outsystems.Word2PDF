@@ -9,12 +9,14 @@ using iText.Html2pdf;
 using iText.Kernel.Pdf;
 using iText.Bouncycastle;
 using iText.Bouncycastleconnector;
-
+using Outsystems.Word2PDF;
 
 namespace Word2PDF
 {
     public class WordToPDF : IWord2PDF
     {
+
+        RemoveWatermark removeWatermark = new RemoveWatermark();
 
         public void Doc2PDF(byte[] Doc, out byte[] PDF, out string Message, out int Code)
         {
@@ -35,26 +37,16 @@ namespace Word2PDF
 
                 byte[] bytes = StreamHmtl.ToArray();
 
-                string result = System.Text.Encoding.UTF8.GetString(bytes);
-                var test = result.Replace("Created with a trial version of Syncfusion Word library", "");
-                byte[] bitTest = System.Text.Encoding.UTF8.GetBytes(test);
+                removeWatermark.removeWatermark(bytes, out byte[] bitBytes, out string Text);
 
-                string result2 = System.Text.Encoding.UTF8.GetString(bitTest);
-                var test2 = result2.Replace("or registered the wrong key in your", "");
-                byte[] bitTest2 = System.Text.Encoding.UTF8.GetBytes(test2);
-
-                string result3 = System.Text.Encoding.UTF8.GetString(bitTest2);
-                var test3 = result3.Replace("application.", "").Replace(" Click ","").Replace("here","").Replace(" to obtain the valid key.", "");
-                byte[] bitTest3 = System.Text.Encoding.UTF8.GetBytes(test3);
-
-                MemoryStream stream = new MemoryStream(bitTest);
+                MemoryStream stream = new MemoryStream(bitBytes);
 
                 ConverterProperties converterProperties = new ConverterProperties();
 
-                PdfWriter writer = new PdfWriter(stream);
-                iText.Kernel.Pdf.PdfDocument pdf = new iText.Kernel.Pdf.PdfDocument(writer);
+                PdfWriter writer = new PdfWriter(stream, new WriterProperties());
+                iText.Kernel.Pdf.PdfDocument pdf = new iText.Kernel.Pdf.PdfDocument(writer.SetCompressionLevel(CompressionConstants.BEST_COMPRESSION));
                 pdf.SetDefaultPageSize(iText.Kernel.Geom.PageSize.DEFAULT);
-                var document = HtmlConverter.ConvertToDocument(test3, pdf, converterProperties);
+                var document = HtmlConverter.ConvertToDocument(Text, pdf, converterProperties);
                 document.Close();
 
                 var pdfBin = stream.ToArray();

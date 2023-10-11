@@ -16,7 +16,7 @@ namespace UnitTest.WordPDF
             ConvertWordPDF.Doc2PDF(bytes, out byte[] PDF, out string Message, out int Code);
 
             byte[] filesave = PDF;
-            string filePath = @"C:\Users\Lenovo\Documents\ResultO2.pdf";
+            string filePath = @"C:\Users\Lenovo\Documents\ResultCompress.pdf";
             File.WriteAllBytes(filePath, filesave);
 
             Assert.True(Message == "");
